@@ -1,5 +1,6 @@
 package com.stock.begin;
 
+
 import java.io.IOException;
 
 import org.apache.http.HttpEntity;
@@ -22,6 +23,7 @@ import org.apache.http.util.EntityUtils;
 
 public class GetUrl {
 	public static String Get(String url) throws Exception {
+	
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		String responseBody = "";
 		try {
@@ -31,7 +33,8 @@ public class GetUrl {
 
 			// Create a custom response handler
 			ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
-
+				
+				@Override
 				public String handleResponse(final HttpResponse response)
 						throws ClientProtocolException, IOException {
 					int status = response.getStatusLine().getStatusCode();
@@ -44,6 +47,8 @@ public class GetUrl {
 								"Unexpected response status: " + status);
 					}
 				}
+
+				
 
 			};
 			responseBody = httpclient.execute(httpget, responseHandler);
