@@ -10,6 +10,7 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 /**
@@ -25,12 +26,13 @@ public class GetUrl {
 	public static String Get(String url) throws Exception {
 	
 		CloseableHttpClient httpclient = HttpClients.createDefault();
+		
 		String responseBody = "";
 		try {
 			HttpGet httpget = new HttpGet(url);
-
+//			/httpget.addHeader("charset", "Gbk");
 			//System.out.println("Executing request " + httpget.getRequestLine());
-
+		
 			// Create a custom response handler
 			ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
 				
@@ -51,11 +53,11 @@ public class GetUrl {
 				
 
 			};
-			responseBody = httpclient.execute(httpget, responseHandler);
+			responseBody = new String(httpclient.execute(httpget, responseHandler).getBytes(), "GBK");
 		} finally {
 			httpclient.close();
 		}
 		
-		return (new String(responseBody.getBytes("GBK"), "utf8"));
+		return responseBody;
 	}
 }
