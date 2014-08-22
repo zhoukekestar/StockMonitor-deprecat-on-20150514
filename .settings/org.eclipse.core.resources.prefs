@@ -1,5 +1,4 @@
 eclipse.preferences.version=1
-encoding//src/com/stock/begin/App.java=UTF-8
-encoding//src/com/stock/begin/GetUrl.java=UTF-8
-encoding//src/com/stock/begin/test.java=UTF-8
+encoding//src/com/stock/app/App.java=UTF-8
+encoding//src/com/stock/util/DateService.java=UTF-8
 encoding//src/com/stock/util/HttpReq.java=UTF-8
