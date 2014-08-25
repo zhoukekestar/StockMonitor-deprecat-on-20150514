@@ -133,7 +133,7 @@ public class DateService {
 				return true;
 			}
 		}
-		if (dt != oldDate)
+		if (dt.getDay() != oldDate.getDay())
 		{
 			hasDone.clear();
 			oldDate = dt;
