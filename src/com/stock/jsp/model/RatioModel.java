@@ -18,7 +18,7 @@ public class RatioModel extends BaseObject {
 
 	@Override
 	void execute() {
-		System.out.println("RatioMobel.java!!!");
+		//System.out.println("RatioMobel.java!!!");
 		MongoClient mongoClient = null;
 		try {
 			mongoClient = new MongoClient("192.168.0.199", 27017);
@@ -36,6 +36,7 @@ public class RatioModel extends BaseObject {
 		DBCursor cur = chinaunion.find();
 
 		List<Map<String, String>> RatioList = new ArrayList<>();
+		try{
 		while (cur.hasNext()) {
 			DBObject object = cur.next();
 
@@ -50,11 +51,19 @@ public class RatioModel extends BaseObject {
 			if (time == null || ratio == null)
 				continue;
 			Map<String, String> ratioMap = new HashMap<String, String>();
-			ratioMap.put("ratio", ratio.substring(0, ratio.indexOf(".")));
+			int index = ratio.indexOf(".");
+			if (index != -1)
+				ratioMap.put("ratio", ratio.substring(0, index));
+			else
+				ratioMap.put("ratio", ratio);
 			ratioMap.put("time", time);
 			RatioList.add(ratioMap);
 		}
-		System.out.println("RatioMobel.java");
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println("Loop Error");
+		}
+		//System.out.println("RatioMobel.java");
 		request.setAttribute("ratio_data", RatioList);
 	}
 
