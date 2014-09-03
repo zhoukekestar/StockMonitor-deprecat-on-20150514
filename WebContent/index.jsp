@@ -26,7 +26,6 @@
 	content: "";
 	display: block;
 	height: 20px;
-	background-color: #72D369;
 	width: 100%;
 	border-radius: 0 8px 8px 0;
 }
@@ -41,7 +40,6 @@
 }
 
 .fan:after {
-	background-color: #F38F8F !important;
 	border-radius: 8px 0 0 8px !important;
 }
 
@@ -50,21 +48,65 @@ p {
 	position: absolute;
 	margin: 0;
 }
+
+.exp span {
+	width: 25%;
+	display: inline-block;
+	border: none;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	float: left;
+}
+.l-1:after
+{
+background-color: rgba(243, 143, 143, 1);
+}
+.l-2:after
+{
+background-color: rgba(243, 143, 143, 0.5);
+}
+.l-3:after
+{
+background-color: rgba(114, 211, 105, 0.5);
+}
+.l-4:after
+{
+background-color: rgba(114, 211, 105, 1);
+}
 </style>
 </head>
 <body>
 	<table style="width: 100%;">
+		<tr>
+			<td style="width: 200px"></td>
+			<td class="exp">
+			<span style="background-color: rgba(243, 143, 143, 1);">下跌主力流出</span> 
+			<span style="background-color: rgba(243, 143, 143, 0.5);">上涨主力流出</span> 
+			<span style="background-color: rgba(114, 211, 105, 0.5);">上涨主力流入</span> 
+			<span style="background-color: rgba(114, 211, 105, 1);">下跌主力流入</span></td>
+		</tr>
 		<c:forEach var="item" items="${ratio_data }" varStatus="i">
 			<tr>
-				<td style="width: 200px;">${item.time }</td>
+				<td style="width: 200px;">${item.time }<span style="font-style: oblique; color: #f00;">(${item.trade })</span></td>
 				<td>
 					<p>${item.ratio}</p>
 					<div class="slide">
 						<c:if test="${item.ratio >= 0 }">
-							<span style="width:${item.ratio/360*100 }%"></span>
+							<c:if test="${item.ratio <= 90 }">
+								<span class="l-3" style="width:${item.ratio/360*100 }%;"></span>
+							</c:if>
+							<c:if test="${item.ratio > 90 }">
+								<span class="l-4" style="width:${item.ratio/360*100 }%;"></span>
+							</c:if>
 						</c:if>
-						<c:if test="${item.ratio <= 0 }">
-							<span class="fan" style="width:${-item.ratio/360*100 }%; margin-left:${item.ratio/360*100 }%;"></span>
+						<c:if test="${item.ratio < 0 }">
+							<c:if test="${item.ratio >= -90 }">
+								<span class="fan l-2" style="width:${-item.ratio/360*100 }%; margin-left:${item.ratio/360*100 }%;"></span>
+							</c:if>
+							<c:if test="${item.ratio < -90 }">
+								<span class="fan l-1" style="width:${-item.ratio/360*100 }%; margin-left:${item.ratio/360*100 }%;"></span>
+							</c:if>
 						</c:if>
 						<div>
 							<span style="background: #B3B3B3"></span> <span style="background: #757575;"></span> <span style="background: #B3B3B3"></span> <span style="background: #757575;"></span>

@@ -12,7 +12,7 @@ public class TimeCtrl {
 		System.out.println("begin");
 		DateService ds = DateService.getInstance();
 		Date date;
-		/*System.out.println("for");
+		System.out.println("for");
 		for (int i = 1; i < 10; i++)//day
 			for (int j = 1; j < 24; j++)//hour
 				for (int k = 0; k < 60; k++)//min
@@ -31,7 +31,7 @@ public class TimeCtrl {
 				}
 		System.out.println("ok");
 		Thread.sleep(3000);
-		System.out.println("over");*/
+		System.out.println("over");
 		
 		date = ds.getInternetDate();
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
